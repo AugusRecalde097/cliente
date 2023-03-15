@@ -1,0 +1,15 @@
+npm install @react-native-async-storage/async-storage
+npm install @react-native-community/datetimepicker
+npm install @react-navigation/drawer
+npm install @react-navigation/native
+npm install @rneui/base
+npm install @rneui/themed
+npm install expo-linear-gradient
+npm install expo-splash-screen
+npm install react-native-gesture-handler
+npm install react-native-modal-datetime-picker
+npm install react-native-reanimated
+npm install react-native-safe-area-context
+npm install react-native-screens
+npm install react-native-svg
+npm install victory-native  
