@@ -34,12 +34,12 @@ function App() {
       <Drawer.Navigator drawerContent={ props => <CustomDrawer {...props} />} >
 
         {/* Pantallas visibles */} 
+        <Drawer.Screen name="Home" component={HomeScreen} options = {{ headerShown: false }}/>
         <Drawer.Screen name="Dashboard" component={Dashboard} options={{ title: 'Inicio', headerShown: true, headerTitle: (props) => <LogoTitle {...props} />  }} />
         <Drawer.Screen name="Sintomas" component={SintomasScreen} options = {{  headerShown: true,  }}/>
         <Drawer.Screen name="Account" component={Account} options={{ title: 'Cuenta', headerShown: true,  }} />
         <Drawer.Screen name="SintomasActuales" component={SintomasActuales} options={{ title: 'Sintomas Actuales', headerShown: true}} />        
         {/* Pantallas adiccionales */}
-        <Drawer.Screen name="Home" component={HomeScreen} options = {{ headerShown: false }}/>
         <Drawer.Screen name="LogIn" component={LogIn} options = {{ headerShown: false }}/>
         <Drawer.Screen name="CreateUser" component={CreateUser} options = {{ headerShown: true }}/>
         <Drawer.Screen name="Pruebas" component={Pruebas} options = {{ headerShown: true }}/>

@@ -92,7 +92,7 @@ const CustomDrawer = (props) => {
             },
             styles.button,
           ]}
-          onPress={() => auth.signOut()}
+          onPress={() => props.navigation.navigate("Home")}
         >
           <Text style={styles.textButton}>Cerrar Sesión</Text>
         </Pressable>

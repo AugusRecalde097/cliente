@@ -11,15 +11,19 @@ const Container = (props) => {
                     colors={['#B3D9DA', '#F6DF7F']}
                     style={style.linearGradient}
                 >
-                    <Image
-                        style={style.logo}
-                        source={require('../img/logo.png')}
-                    />
+                
 
-                    <View style={{ top: '55%',
+
+                    <View style={{ 
+                        flex: 2,
+                        display:'flex',
                         flexDirection: 'column',
-                        justifyContent: 'center',
+                        justifyContent: 'space-around',
                         alignItems: 'center', }} >
+                        <Image
+                            style={style.logo}
+                            source={require('../img/logo.png')}
+                        />
                         <Pressable
                             style={style.button}
                             onPress={() =>
@@ -27,13 +31,13 @@ const Container = (props) => {
                         >
                             <Text style={style.textButton}>Iniciar Sesión</Text>
                         </Pressable>
-                        <Pressable
+                        {/* <Pressable
                             style={style.button}
                             onPress={() =>
                                 props.navigation.navigate("CreateUser")}
                         >
                             <Text style={style.textButton}>Crear nuevo usuario</Text>
-                        </Pressable>
+                        </Pressable> */}
                     </View>
                 </LinearGradient>
 
@@ -46,6 +50,7 @@ const Container = (props) => {
 const style = StyleSheet.create({
     container: {
         flex: 1,
+        display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignContent: 'center'
@@ -59,10 +64,6 @@ const style = StyleSheet.create({
 
     },
     logo: {
-        position: 'absolute',
-
-  transform: [{ translateY: 50 }, { translateX: 50 }],
-        bottom: '68.84%',
         width: 247,
         height: 142,
         resizeMode: 'center',

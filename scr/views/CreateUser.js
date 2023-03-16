@@ -82,6 +82,7 @@ const CreateUserScreen = (prop) => {
         mensaje: "Las contraseñas no coinciden. Vuelve a intentarlo.",
       });
     }
+    prop.navigation.navigate("LogIn");
   };
   const mensajeError = (codeError) => {
     //alert(codeError)

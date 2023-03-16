@@ -50,11 +50,44 @@ const Container = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-
+  const getDatosPersona = async () => {
+    await fetch('http://192.168.1.7:8080/personas')
+    .then(res => res.json())
+    .then(res => console.log(res))
+  
+  
+  }
+useEffect(() => {
+  getDatosPersona()
+}, [])
   const renderChart = () => {
 
-    let sintomas = []
-    let total = []
+    let sintomas = [    {
+      id: 1,
+      title: "Visión doble",
+      ptos: 2,
+    },
+    {
+      id: 2,
+      title: "Visión doble",
+      ptos: 5,
+    },
+    {
+      id: 3,
+      title: "Ptosis",
+      ptos: 1,
+    },
+    {
+      id: 4,
+      title: "Deglución",
+      ptos: 3,
+    },
+    {
+      id: 5,
+      title: "Inicio de Disartria",
+      ptos: 3,
+    },]
+    let total = 5
     if (sintomas.length > 0) {
       //Creo un nuevo array necesario para usarlo en el gráfico
       let chartData = sintomas.map((item) => {

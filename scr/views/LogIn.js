@@ -46,7 +46,7 @@ const LogIn = (prop) => {
   };
 
   const handleLogin = () => {
-
+    prop.navigation.navigate("Dashboard");
   };
 
   const renderModal = () => {
