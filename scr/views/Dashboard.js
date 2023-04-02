@@ -21,7 +21,7 @@ import { formatFechaBase } from "../utils/globalFunctions";
 import ButtonCustom from "../components/button";
 import DropDownCustom from '../components/CustomDropDown';
 
-const Container = (props) => {
+const Container = ({ navigation, route }) => {
   const screenWidth = Dimensions.get("window").width;
   const mensajesErr = errores.mensajesErrores;
  
@@ -51,15 +51,19 @@ const Container = (props) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const getDatosPersona = async () => {
-    await fetch('http://192.168.1.7:8080/personas')
-    .then(res => res.json())
-    .then(res => console.log(res))
-  
-  
+    let id_usuario = route.params?.id
+    if(id_usuario > 0){
+      await fetch('http://192.168.1.7:8080/usuario/'+id_usuario)
+      .then(res => res.json())
+      .then(res => console.log(res))
+    }
   }
+
 useEffect(() => {
   getDatosPersona()
 }, [])
+
+
   const renderChart = () => {
 
     let sintomas = [    {
@@ -168,10 +172,6 @@ useEffect(() => {
   const onSelect = (item) => {
     setSelectedItem(item);
   }
-
-
-
-
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

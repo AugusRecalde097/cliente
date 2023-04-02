@@ -36,17 +36,35 @@ const LogIn = (prop) => {
 
   }, []);
 
-  const mensajeError = (codeError) => {
+  const mensajeError = (mensaje) => {
     // alert(codeError)
 
     setModalVisible({
       state: true,
-      mensaje: mensajesErr[codeError],
+      mensaje: mensaje,
     });
   };
 
-  const handleLogin = () => {
-    prop.navigation.navigate("Dashboard");
+  const handleLogin = async () => {
+    
+    let _datos = {
+      pass: state.pass,
+      mail: state.email
+    }
+
+    fetch('http://192.168.1.7:8080/usuario', {
+      body: JSON.stringify(_datos),
+      method: 'POST',
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    }).then(result => result.json())
+    .then( result => {
+
+      if(result.resp == 'ok'){
+        prop.navigation.navigate("Dashboard", {id:result.id})
+      }else{
+        mensajeError('El mail o la contraseña incorrecta.')
+      }
+    })
   };
 
   const renderModal = () => {
