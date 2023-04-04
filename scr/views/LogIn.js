@@ -45,6 +45,20 @@ const LogIn = (prop) => {
     });
   };
 
+
+
+  setStringValue = async (value) => {
+    //console.log("value: ",JSON.stringify(value))
+    try {
+      await AsyncStorage.setItem('hamburgesa', JSON.stringify(value))
+      prop.navigation.navigate("Dashboard", {id:value.id})
+    } catch(e) {
+      console.log(e)
+    }
+  
+    
+  }
+  
   const handleLogin = async () => {
     
     let _datos = {
@@ -60,7 +74,10 @@ const LogIn = (prop) => {
     .then( result => {
 
       if(result.resp == 'ok'){
-        prop.navigation.navigate("Dashboard", {id:result.id})
+       //console.log("api resp: ", result)
+        setStringValue({id:result.id , nombre : result.nombre})
+
+        //AsyncStorage.setItem('datos_usuario',JSON.stringify())
       }else{
         mensajeError('El mail o la contraseña incorrecta.')
       }

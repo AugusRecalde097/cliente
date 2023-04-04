@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, Dimensions, Pressable } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { styles } from "../styles";
 import { ListItem, Avatar, Icon } from '@rneui/themed';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CustomDrawer = (props) => {
-  return (
+ const [userData, setUserData] = useState({
+  id:'',
+  nombre: ''
+ })
+  const getDatosPersona = async () => {
+       // read merged item
+       const currentUser = await AsyncStorage.getItem('hamburgesa')
+       setUserData(JSON.parse(currentUser))
+       //console.log(currentUser)
+  }
+
+  const handleCerrarSesion = async () =>{
+    setUserData({  id:'',nombre: ''})
+    await AsyncStorage.removeItem('hamburgesa')
+    props.navigation.navigate("Home")
+  }
+
+  useEffect(() => {
+    getDatosPersona()
+  }, [])
+ 
+  return ( 
     <View style={{ flex: 1, height:'80%' }}>
       <DrawerContentScrollView {...props}>
         {/* Avatar y nombre de perfil */}
@@ -22,7 +44,9 @@ const CustomDrawer = (props) => {
             size="large"
             onPress={() => props.navigation.navigate("Account")}
           />
-          <Text style={[styles.fontTitles, {margin: 10}]} onPress={() => props.navigation.navigate("Account")}>{'[ACA VA EL USUARIO]'}</Text>
+          <Text style={[styles.fontTitles, {margin: 10}]} onPress={() => props.navigation.navigate("Account")}>
+            {userData.nombre}
+          </Text>
         <View style={{borderBottomWidth: 1, width: '50%', borderBottomColor: '#4271A4' }}></View>
         </View>
 
@@ -88,11 +112,10 @@ const CustomDrawer = (props) => {
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? "rgb(210, 230, 255)" : "white",
-              // left: "50%",
             },
             styles.button,
           ]}
-          onPress={() => props.navigation.navigate("Home")}
+          onPress={() => handleCerrarSesion()}
         >
           <Text style={styles.textButton}>Cerrar Sesión</Text>
         </Pressable>

@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, Text, View, Image, Button, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Container = (props) => {
+    const [userData, setUserData] = useState({
+        id:'',
+        nombre: ''
+       })
+    const getDatosPersona = async () => {
+        // read merged item
+        const currentUser = await AsyncStorage.getItem('hamburgesa')
+        //console.log(currentUser);
+         setUserData(JSON.parse(currentUser))
+         if(userData?.id > 0){
+         console.log('Cargando...');
+            props.navigation.navigate("Dashboard", {id:userData.id})
+        }
+        
+   }
+   useEffect(() => {
+     getDatosPersona()
+   }, [])
+
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={style.container}>
@@ -11,8 +31,6 @@ const Container = (props) => {
                     colors={['#B3D9DA', '#F6DF7F']}
                     style={style.linearGradient}
                 >
-                
-
 
                     <View style={{ 
                         flex: 2,
@@ -31,13 +49,6 @@ const Container = (props) => {
                         >
                             <Text style={style.textButton}>Iniciar Sesión</Text>
                         </Pressable>
-                        {/* <Pressable
-                            style={style.button}
-                            onPress={() =>
-                                props.navigation.navigate("CreateUser")}
-                        >
-                            <Text style={style.textButton}>Crear nuevo usuario</Text>
-                        </Pressable> */}
                     </View>
                 </LinearGradient>
 

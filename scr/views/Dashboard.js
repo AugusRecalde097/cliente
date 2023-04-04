@@ -51,12 +51,16 @@ const Container = ({ navigation, route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const getDatosPersona = async () => {
-    let id_usuario = route.params?.id
+    //console.log(route.params?.id) 
+    let id_usuario = 0
     if(id_usuario > 0){
       await fetch('http://192.168.1.7:8080/usuario/'+id_usuario)
       .then(res => res.json())
-      .then(res => console.log(res))
+ 
     }
+       // read merged item
+       const currentUser = await AsyncStorage.getItem('hamburgesa')
+       //console.log(currentUser)
   }
 
 useEffect(() => {
@@ -91,6 +95,7 @@ useEffect(() => {
       title: "Inicio de Disartria",
       ptos: 3,
     },]
+    sintomas = []
     let total = 5
     if (sintomas.length > 0) {
       //Creo un nuevo array necesario para usarlo en el gráfico
@@ -134,7 +139,7 @@ useEffect(() => {
                           target: "labels",
                           mutation: (props) => {
                             let categoryName = chartData[props.index].name;
-                            let puntos = chartData[props.index].y;
+                            let puntos = chartData[props.index].y || 0;
                             alert(
                               `${categoryName.toUpperCase()} con ${puntos} puntos`
                             );
