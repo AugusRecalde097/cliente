@@ -45,7 +45,7 @@ const CustomDrawer = (props) => {
             onPress={() => props.navigation.navigate("Account")}
           />
           <Text style={[styles.fontTitles, {margin: 10}]} onPress={() => props.navigation.navigate("Account")}>
-            {userData.nombre}
+            {userData?.nombre}
           </Text>
         <View style={{borderBottomWidth: 1, width: '50%', borderBottomColor: '#4271A4' }}></View>
         </View>

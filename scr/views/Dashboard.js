@@ -51,12 +51,11 @@ const Container = ({ navigation, route }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const getDatosPersona = async () => {
-    //console.log(route.params?.id) 
-    let id_usuario = 0
+    console.log('id: ',route.params?.id) 
+    //let id_usuario = 0
     if(id_usuario > 0){
-      await fetch('http://192.168.1.7:8080/usuario/'+id_usuario)
+      await fetch('http://192.168.110.192:8080/usuario/'+route.params?.id)
       .then(res => res.json())
- 
     }
        // read merged item
        const currentUser = await AsyncStorage.getItem('hamburgesa')
